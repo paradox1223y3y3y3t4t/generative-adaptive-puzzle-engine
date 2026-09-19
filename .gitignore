@@ -1,0 +1,8 @@
+venv/
+__pycache__/
+*/__pycache__/
+*.pyc
+
+database/puzzle_engine.db
+
+app_backup_before_final_result.py

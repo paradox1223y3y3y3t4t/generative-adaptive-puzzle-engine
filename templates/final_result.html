@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5 mb-5">
+
+    <!-- Header -->
+    <div class="text-center mb-4">
+
+        <h1 class="fw-bold">
+            🎯 Final Performance
+        </h1>
+
+        <p class="text-muted">
+            Congratulations {{ user_name }}!
+            You have completed 10 puzzles.
+        </p>
+
+    </div>
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-10">
+
+            <div class="final-result-card bg-white shadow p-4">
+
+                <!-- Result Heading -->
+                <div class="text-center mb-4">
+
+                    <h3>
+                        Your Final Result
+                    </h3>
+
+                    <p class="text-muted">
+                        Here is your performance summary for this
+                        10-puzzle session.
+                    </p>
+
+                </div>
+
+                <hr>
+
+                <!-- Statistics -->
+                <div class="row text-center mt-4">
+
+                    <div class="col-md-4 mb-3">
+                        <div class="card bg-light p-3">
+                            <small class="text-muted">
+                                Total Questions
+                            </small>
+
+                            <h3>
+                                {{ result.total_questions }}
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <div class="card bg-light p-3">
+                            <small class="text-muted">
+                                Correct Answers
+                            </small>
+
+                            <h3 class="text-success">
+                                {{ result.correct_answers }}
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <div class="card bg-light p-3">
+                            <small class="text-muted">
+                                Wrong Answers
+                            </small>
+
+                            <h3 class="text-danger">
+                                {{ result.wrong_answers }}
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <div class="card bg-light p-3">
+                            <small class="text-muted">
+                                Accuracy
+                            </small>
+
+                            <h3 class="text-primary">
+                                {{ result.accuracy }}%
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <div class="card bg-light p-3">
+                            <small class="text-muted">
+                                Average Response Time
+                            </small>
+
+                            <h3>
+                                {{ result.average_response_time }} sec
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <div class="card bg-light p-3">
+                            <small class="text-muted">
+                                Final Difficulty
+                            </small>
+
+                            <h3 class="text-primary">
+                                {{ result.final_difficulty }}
+                            </h3>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Performance Level -->
+                <div class="text-center mt-4">
+
+                    <h4>
+                        Performance Level
+                    </h4>
+
+                    <div class="alert alert-primary mt-3">
+
+                        <h3 class="mb-0">
+                            {{ result.performance_level }}
+                        </h3>
+
+                    </div>
+
+                </div>
+
+                <!-- Recommendation -->
+                <div class="mt-4">
+
+                    <h4 class="text-center">
+                        💡 Recommendation
+                    </h4>
+
+                    <div class="alert alert-info mt-3">
+
+                        <p class="mb-0 text-center">
+                            {{ result.recommendation }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- Dashboard Button -->
+                <div class="text-center mt-4">
+
+                    <a
+                        href="{{ url_for('dashboard') }}"
+                        class="btn btn-primary"
+                    >
+                        Back to Dashboard
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

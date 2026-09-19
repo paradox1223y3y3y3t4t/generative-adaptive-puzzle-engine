@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="mb-4">Welcome, {{ user_name }}!</h1>
+
+<div class="row g-3 mb-4">
+
+    <div class="col-md-4 col-lg-3">
+        <div class="card shadow h-100 border-primary">
+            <div class="card-body text-center">
+                <p class="text-muted mb-1">Total Attempts</p>
+                <h2 class="text-primary">{{ profile["total_attempts"] }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 col-lg-3">
+        <div class="card shadow h-100 border-success">
+            <div class="card-body text-center">
+                <p class="text-muted mb-1">Correct Answers</p>
+                <h2 class="text-success">{{ profile["correct_answers"] }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 col-lg-3">
+        <div class="card shadow h-100 border-danger">
+            <div class="card-body text-center">
+                <p class="text-muted mb-1">Wrong Answers</p>
+                <h2 class="text-danger">{{ profile["wrong_answers"] }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 col-lg-3">
+        <div class="card shadow h-100 border-info">
+            <div class="card-body text-center">
+                <p class="text-muted mb-1">Accuracy</p>
+                <h2 class="text-info">{{ profile["accuracy"] }}%</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row g-3 mb-4">
+
+    <div class="col-md-4">
+        <div class="card shadow h-100">
+            <div class="card-body text-center">
+                <p class="text-muted mb-1">Average Time</p>
+                <h4>{{ profile["average_response_time"] }} seconds</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow h-100">
+            <div class="card-body text-center">
+                <p class="text-muted mb-1">Performance Score</p>
+                <h4>{{ profile["performance_score"] }}</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow h-100">
+            <div class="card-body text-center">
+                <p class="text-muted mb-1">Current Difficulty</p>
+                <h4>
+                    <span class="badge bg-primary">
+                        {{ profile["current_difficulty"] }}
+                    </span>
+                </h4>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row g-4 mb-4">
+
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-body">
+                <h4 class="text-center">Correct vs Wrong Answers</h4>
+                <canvas id="answerChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-body">
+                <h4 class="text-center">Difficulty Attempted</h4>
+                <canvas id="difficultyChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="card shadow">
+    <div class="card-body p-4">
+        <h3 class="mb-3">Choose Puzzle Category</h3>
+
+        <form method="POST" action="{{ url_for('puzzle') }}">
+            <div class="mb-3">
+                <select name="category" class="form-select" required>
+                    <option value="">-- Select a category --</option>
+                    <option value="Number Puzzle">Number Puzzle</option>
+                    <option value="Sequence Puzzle">Sequence Puzzle</option>
+                    <option value="Pattern Puzzle">Pattern Puzzle</option>
+                    <option value="Logical Reasoning">Logical Reasoning</option>
+                    <option value="Basic Mathematical Puzzle">
+                        Basic Mathematical Puzzle
+                    </option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-success">
+                Start Puzzle
+            </button>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const chartData = {{ chart_data | tojson }};
+
+    new Chart(document.getElementById("answerChart"), {
+        type: "doughnut",
+        data: {
+            labels: ["Correct", "Wrong"],
+            datasets: [
+                {
+                    data: [chartData.correct, chartData.wrong],
+                    backgroundColor: ["#198754", "#dc3545"]
+                }
+            ]
+        }
+    });
+
+    new Chart(document.getElementById("difficultyChart"), {
+        type: "bar",
+        data: {
+            labels: ["Easy", "Medium", "Hard"],
+            datasets: [
+                {
+                    label: "Puzzles Attempted",
+                    data: [
+                        chartData.easy,
+                        chartData.medium,
+                        chartData.hard
+                    ],
+                    backgroundColor: ["#0d6efd", "#ffc107", "#dc3545"]
+                }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+{% endblock %}

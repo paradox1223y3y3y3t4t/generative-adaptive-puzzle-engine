@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5 mb-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-8">
+
+            <div class="result-box bg-white shadow p-4 text-center">
+
+                <!-- Result Status -->
+                {% if result["correct"] %}
+                    <h2 class="text-success fw-bold">
+                        Correct Answer! ✅
+                    </h2>
+
+                    <p class="text-muted">
+                        Great job! Your answer was correct.
+                    </p>
+
+                {% else %}
+                    <h2 class="text-danger fw-bold">
+                        Incorrect Answer ❌
+                    </h2>
+
+                    <p class="text-muted">
+                        Don't worry. Check the correct answer and explanation below.
+                    </p>
+                {% endif %}
+
+                <hr>
+
+                <!-- Puzzle Information -->
+                <div class="row text-center mt-4">
+
+                    <div class="col-md-6 mb-3">
+                        <div class="card bg-light p-3">
+                            <small class="text-muted">Category</small>
+                            <h5>{{ result["category"] }}</h5>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <div class="card bg-light p-3">
+                            <small class="text-muted">Puzzle Difficulty</small>
+                            <h5>{{ result["difficulty"] }}</h5>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <div class="card bg-light p-3">
+                            <small class="text-muted">Your Answer</small>
+                            <h5>{{ result["selected_answer"] }}</h5>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <div class="card bg-light p-3">
+                            <small class="text-muted">Correct Answer</small>
+                            <h5 class="text-success">
+                                {{ result["correct_answer"] }}
+                            </h5>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <div class="card bg-light p-3">
+                            <small class="text-muted">Response Time</small>
+                            <h5>
+                                {{ result["response_time"] }} seconds
+                            </h5>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <div class="card bg-light p-3">
+                            <small class="text-muted">Next Puzzle Difficulty</small>
+                            <h5 class="text-primary">
+                                {{ result["next_difficulty"] }}
+                            </h5>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Explanation -->
+                <div class="alert alert-info text-start mt-4">
+
+                    <h5>💡 Explanation</h5>
+
+                    <p class="mb-0">
+                        {{ result["explanation"] }}
+                    </p>
+
+                </div>
+
+                <!-- Buttons -->
+                <div class="mt-4">
+
+                    <a
+                        href="{{ url_for('next_puzzle') }}"
+                        class="btn btn-success me-2"
+                    >
+                        Next Puzzle ➡️
+                    </a>
+
+                    <a
+                        href="{{ url_for('dashboard') }}"
+                        class="btn btn-secondary"
+                    >
+                        Dashboard
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

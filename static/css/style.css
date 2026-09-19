@@ -1,0 +1,104 @@
+body {
+    background-color: #f5f7fb;
+    font-family: Arial, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Main cards */
+.card {
+    border: none;
+    border-radius: 12px;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 8px;
+    padding: 10px 20px;
+}
+
+/* Dashboard headings */
+h1, h2, h3, h4 {
+    font-weight: 600;
+}
+
+/* Dashboard statistics cards */
+.stat-card {
+    transition: transform 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+}
+
+/* Puzzle question */
+.question-box {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Options */
+.option-btn {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 12px;
+    padding: 12px 15px;
+    border-radius: 8px;
+}
+
+/* Timer */
+.timer {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Result page */
+.result-box {
+    border-radius: 12px;
+    padding: 25px;
+}
+
+/* Final result */
+.final-result-card {
+    border-radius: 15px;
+}
+
+/* Forms */
+.form-control {
+    border-radius: 8px;
+    padding: 10px;
+}
+
+/* Footer */
+footer {
+    margin-top: 40px;
+    padding: 20px;
+    text-align: center;
+    color: #666;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+    h1 {
+        font-size: 28px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    .card {
+        margin-bottom: 15px;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+}
