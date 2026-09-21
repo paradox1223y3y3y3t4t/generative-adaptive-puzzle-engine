@@ -8,6 +8,9 @@ BASE_DIR = Path(__file__).resolve().parent
 # This is where our SQLite database file will be saved.
 DATABASE_PATH = BASE_DIR / "database" / "puzzle_engine.db"
 
+# Create the database folder if it does not already exist.
+DATABASE_PATH.parent.mkdir(parents=True, exist_ok=True)
+
 
 def get_connection():
     """
