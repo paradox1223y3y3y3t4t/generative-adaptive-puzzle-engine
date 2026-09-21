@@ -1,5 +1,13 @@
 # Generative Adaptive Puzzle Engine with Learner Modeling and Difficulty Control
 
+## 🚀 Live Project
+
+[Open Live Project](https://generative-adaptive-puzzle-engine.onrender.com)
+
+## 📂 GitHub Repository
+
+[View GitHub Repository](https://github.com/paradox1223y3y3t4t/generative-adaptive-puzzle-engine)
+
 ## 📌 Project Overview
 
 The Generative Adaptive Puzzle Engine is a web-based puzzle application developed using Python and Flask.
