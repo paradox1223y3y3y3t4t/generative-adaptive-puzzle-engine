@@ -48,7 +48,11 @@ def register():
             user_id = cursor.lastrowid
 
             cursor.execute(
-                "INSERT INTO learner_profiles (user_id, current_difficulty) VALUES (?, ?)",
+                """
+                INSERT INTO learner_profiles
+                (user_id, current_difficulty)
+                VALUES (?, ?)
+                """,
                 (user_id, "Easy")
             )
 
@@ -113,6 +117,30 @@ def dashboard():
     )
 
     profile = cursor.fetchone()
+
+    # ---------------------------------------------------------
+    # FIX:
+    # Create a learner profile if it does not exist.
+    # This does not change the existing learner/adaptive logic.
+    # ---------------------------------------------------------
+    if profile is None:
+        cursor.execute(
+            """
+            INSERT INTO learner_profiles
+            (user_id, current_difficulty)
+            VALUES (?, ?)
+            """,
+            (session["user_id"], "Easy")
+        )
+
+        connection.commit()
+
+        cursor.execute(
+            "SELECT * FROM learner_profiles WHERE user_id = ?",
+            (session["user_id"],)
+        )
+
+        profile = cursor.fetchone()
 
     # Get all attempts for the dashboard chart.
     cursor.execute(
@@ -220,6 +248,27 @@ def create_next_puzzle(category):
     )
 
     profile = cursor.fetchone()
+
+    # Safety protection in case the profile is missing.
+    if profile is None:
+        cursor.execute(
+            """
+            INSERT INTO learner_profiles
+            (user_id, current_difficulty)
+            VALUES (?, ?)
+            """,
+            (session["user_id"], "Easy")
+        )
+
+        connection.commit()
+
+        cursor.execute(
+            "SELECT current_difficulty FROM learner_profiles WHERE user_id = ?",
+            (session["user_id"],)
+        )
+
+        profile = cursor.fetchone()
+
     connection.close()
 
     difficulty = profile["current_difficulty"]
